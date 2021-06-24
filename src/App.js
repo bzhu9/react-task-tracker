@@ -20,7 +20,7 @@ function App() {
 
   // Fetch Tasks
   const fetchTasks = async () => {
-    const res = await fetch("http://localhost:5000/tasks")
+    const res = await fetch("https://my-json-server.typicode.com/bzhu9/react-task-tracker-json-server/tasks")
     const data = await res.json()
 
     return data
@@ -28,7 +28,7 @@ function App() {
 
   // Fetch Task
   const fetchTask = async (id) => {
-    const res = await fetch(`http://localhost:5000/tasks/${id}`)
+    const res = await fetch(`https://my-json-server.typicode.com/bzhu9/react-task-tracker-json-server/tasks/${id}`)
     const data = await res.json()
 
     return data
@@ -36,7 +36,7 @@ function App() {
 
   // Add Task
   const addTask = async (task) => {
-    const res = await fetch('http://localhost:5000/tasks', {
+    const res = await fetch('https://my-json-server.typicode.com/bzhu9/react-task-tracker-json-server/tasks', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -49,7 +49,7 @@ function App() {
 
   // Delete Task
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/tasks/${id}`,{
+    await fetch(`https://my-json-server.typicode.com/bzhu9/react-task-tracker-json-server/tasks/${id}`,{
       method: 'DELETE',
     })
 
@@ -61,7 +61,7 @@ function App() {
     const taskToToggle = await fetchTask(id)
     const updatedTask = { ...taskToToggle, reminder: !taskToToggle.reminder}
 
-    const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+    const res = await fetch(`https://my-json-server.typicode.com/bzhu9/react-task-tracker-json-server/tasks/${id}`, {
       method: "PUT",
       headers: {
         'Content-type': 'application/json'
@@ -78,14 +78,14 @@ function App() {
     <Router>
       <div className="container">
         <Header onAdd={() => setShowAddTask(!showAddTask)} showAdd={showAddTask}/>
-        <Route path='/' exact render={(props) => (
+        <Route path='/react-task-tracker' exact render={(props) => (
             <>
               {showAddTask && <AddTask onAdd={addTask}/>}
               {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder} />) : ('No Tasks to Show')}
             </>
           )}
         />
-        <Route path='/about' component={About} />
+        <Route path='/react-task-tracker/about' component={About} />
         <Footer />
       </div>
     </Router>
